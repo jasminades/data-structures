@@ -1,14 +1,14 @@
 package org.example.week1;
 
-
 import java.util.Iterator;
+import java.util.LinkedList;
+
 
 public class DoublyLinkedList<Data> implements Iterable<Data> {
     private DoubleNode<Data> head;
     private DoubleNode<Data> tail;
     private int size = 0;
 
-    /* Add a new node to the front */
     public void addToFront(Data data) {
         DoubleNode<Data> newNode = new DoubleNode<>(data);
 
@@ -23,7 +23,6 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         size++;
     }
 
-    /* Remove a node from the front  */
     public void removeFromFront() {
         if (head != null) {
             head = head.getNext();
@@ -31,7 +30,6 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
             if (head != null) {
                 head.setPrev(null);
             } else {
-                // The list is now empty, update tail
                 tail = null;
             }
 
@@ -39,8 +37,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         }
     }
 
-    /* Add a new node to the end  */
-    public void addToRear(Data data) {
+    public void addToTail(Data data) {
         DoubleNode<Data> newNode = new DoubleNode<>(data);
 
         if (tail == null) {
@@ -54,8 +51,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         size++;
     }
 
-    /* Remove a node at the end  */
-    public void removeFromRear() {
+    public void removeFromTail() {
         if (tail != null) {
             tail = tail.getPrev();
 
@@ -69,7 +65,6 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         }
     }
 
-    /* Get a linked list node by index */
     public Data get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -83,7 +78,6 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         return current.getData();
     }
 
-    /* Add an element to a doubly linked list  */
     public void add(int index, Data data) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -92,7 +86,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         if (index == 0) {
             addToFront(data);
         } else if (index == size) {
-            addToRear(data);
+            addToTail(data);
         } else {
             DoubleNode<Data> newNode = new DoubleNode<>(data);
             DoubleNode<Data> current = head;
@@ -110,7 +104,6 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         }
     }
 
-    /* Delete an element from a doubly linked list */
     public void remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -119,7 +112,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         if (index == 0) {
             removeFromFront();
         } else if (index == size - 1) {
-            removeFromRear();
+            removeFromTail();
         } else {
             DoubleNode<Data> current = head;
 
@@ -142,7 +135,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
     public Iterator<Data> iterator() {
         return new DoublyLinkedListIterator();
     }
-+
+
     private class DoublyLinkedListIterator implements Iterator<Data> {
         private DoubleNode<Data> current = head;
 
