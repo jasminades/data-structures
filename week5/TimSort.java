@@ -2,26 +2,25 @@ package org.example.week5;
 
 public class TimSort {
     public static <Data extends Comparable<Data>> void sort(Data[] elements, int threshold) {
-        // Create an auxiliary array for merging
         Comparable[] aux = new Comparable[elements.length];
 
-        // Perform Timsort
+    
         timsort(elements, aux, threshold);
     }
 
     private static <Data extends Comparable<Data>> void timsort(Data[] elements, Comparable[] aux, int threshold) {
         int n = elements.length;
 
-        // Calculate the minimum run length
+   
         int minRun = calculateMinRun(n, threshold);
 
-        // Divide the array into runs and sort each run using insertion sort
+      
         for (int i = 0; i < n; i += minRun) {
             int runEnd = Math.min(i + minRun - 1, n - 1);
             insertionSort(elements, i, runEnd);
         }
 
-        // Merge adjacent runs
+     
         for (int size = minRun; size < n; size *= 2) {
             for (int start = 0; start < n; start += 2 * size) {
                 int mid = Math.min(start + size - 1, n - 1);
@@ -44,12 +43,10 @@ public class TimSort {
     }
 
     private static <Data extends Comparable<Data>> void merge(Data[] elements, Comparable[] aux, int low, int mid, int high) {
-        // Copy elements to auxiliary array
         for (int k = low; k <= high; k++) {
             aux[k] = elements[k];
         }
 
-        // Merge the two sorted subarrays
         int i = low, j = mid + 1;
         for (int k = low; k <= high; k++) {
             if (i > mid) {
@@ -74,7 +71,6 @@ public class TimSort {
     }
 
     public static int calculateRunLength(int initialLength, int threshold) {
-        // Calculate the run length using the given threshold
         return Math.min(initialLength, threshold);
     }
 }
