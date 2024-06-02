@@ -1,6 +1,7 @@
 package org.example.homework1;
 
-public class binarysearch {
+
+public class BinarySearch {
 
     public static int[] search(Entry[] entries, String searchableName) {
         int low = 0;

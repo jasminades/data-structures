@@ -26,7 +26,7 @@ public class PhonebookV1 {
                 break;
             }
 
-            int[] result = binarysearch.search(entries, name);
+            int[] result = BinarySearch.search(entries, name);
             if (result[0] == -1) {
                 System.out.println("No entries with that name.");
             } else {
